@@ -1,9 +1,21 @@
-import { Button } from "@/components/ui/button";
+import BadgeFilter from "@/components/ui/badge-filter";
+import RecipeList from "@/components/ui/recipe-list";
 
-export default function Home() {
+const getRecipes = async () => {
+  const response = await fetch("https://dummyjson.com/recipes");
+  const data = await response.json();
+  return data.recipes;
+};
+
+export default async function HomePage() {
+  const recipes = await getRecipes();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button>Hi there!</Button>
-    </main>
+    <div className="xl:px-24 px-10">
+      <div className="my-12">
+        <BadgeFilter />
+        <RecipeList recipes={recipes} />
+      </div>
+    </div>
   );
 }
