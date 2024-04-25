@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useContext, useState } from "react";
 import { Badge } from "./badge";
+import { RecipeContext } from "@/context/recipe-context";
 
 export default function BadgeFilter() {
-  const [badge, setBadge] = useState("");
+  const { dispatch } = useContext(RecipeContext);
   const cuisines: Array<string> = [
     "All",
     "Asian",
@@ -18,11 +20,16 @@ export default function BadgeFilter() {
   ];
 
   const handleOnClick = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     cuisine: string
   ) => {
     e.preventDefault();
-    setBadge(cuisine);
+    dispatch({
+      type: "SELECTED_CUISINE",
+      payload: {
+        selectedCuisine: cuisine,
+      },
+    });
   };
   return (
     <div>

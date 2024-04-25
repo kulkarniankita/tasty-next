@@ -1,11 +1,6 @@
 import BadgeFilter from "@/components/ui/badge-filter";
 import RecipeList from "@/components/ui/recipe-list";
-
-const getRecipes = async () => {
-  const response = await fetch("https://dummyjson.com/recipes");
-  const data = await response.json();
-  return data.recipes;
-};
+import { getRecipes } from "@/lib/recipe";
 
 export default async function HomePage() {
   const recipes = await getRecipes();
