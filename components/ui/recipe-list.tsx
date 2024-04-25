@@ -19,7 +19,7 @@ export default function RecipeList({
   recipes: Array<RecipeType>;
 }) {
   const [filterRecipes, setFilterRecipes] = useState<RecipeType[]>([]);
-  const recipes = filterRecipes.length > 0 ? filterRecipes : recipes;
+  const allRecipes = filterRecipes.length > 0 ? filterRecipes : recipes;
 
   const {
     state: { selectedCuisine },
@@ -39,7 +39,7 @@ export default function RecipeList({
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-x-10 gap-y-20 xl:gap-y-32 xl:pt-32 pt-12 pb-40">
-      {recipes.map((recipe: RecipeType, idx: number) => (
+      {allRecipes.map((recipe: RecipeType, idx: number) => (
         <Link href={`/recipes/${recipe.id}`} key={`${recipe.name}-${idx}`}>
           <Card className="flex flex-col bg-orange-50 hover:scale-105 ease-in duration-200 xl:min-h-[600px] fancyGradient">
             <CardHeader className="relative h-80">
